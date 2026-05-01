@@ -1,0 +1,12 @@
+obj/
+bin/
+*.o
+*.out
+
+.vscode/
+*.swp
+*.swo
+*~
+
+.DS_Store
+Thumbs.db
