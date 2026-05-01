@@ -5,9 +5,9 @@
 
 // NODE
 typedef struct NodeBST {
+  li chave;
   struct NodeBST *esq;
   struct NodeBST *dir;
-  li chave;
 } NodeBST;
 
 static NodeBST *createNodeBST(li chave) {
@@ -92,6 +92,7 @@ static int searchNode(NodeBST *node, li chave) {
   }
   return 0;
 }
+
 static int heightNode(NodeBST *node) {
 
   if (!node) {
@@ -107,6 +108,7 @@ static int heightNode(NodeBST *node) {
     return alt_dir + 1;
   }
 }
+
 static void preOrder(NodeBST *node) {
   if (!node)
     return;
@@ -114,6 +116,7 @@ static void preOrder(NodeBST *node) {
   preOrder(node->esq);
   preOrder(node->dir);
 }
+
 static void inOrder(NodeBST *node) {
   if (!node) {
     return;
@@ -122,6 +125,7 @@ static void inOrder(NodeBST *node) {
   printf("%li ", node->chave);
   inOrder(node->dir);
 }
+
 static void postOrder(NodeBST *node) {
   if (!node)
     return;
@@ -132,7 +136,7 @@ static void postOrder(NodeBST *node) {
 
 // BST
 typedef struct BST {
-  struct NodeBST *raiz;
+  NodeBST *raiz;
   li tamanho;
 } BST;
 

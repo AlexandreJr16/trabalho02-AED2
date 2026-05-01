@@ -3,12 +3,6 @@
 
 typedef long int li;
 
-// NODE
-typedef struct NodeAVL NodeAVL;
-
-NodeAVL *createNodeAVL(li chave);
-void destroyNodeAVL(NodeAVL *self);
-
 // AVL
 typedef struct AVL AVL;
 
