@@ -25,25 +25,6 @@
 - getElementAt: int (Vector \*self, int index)
 - setElementAt: void (Vector \*self, int index, int value)
 
-### Operações Internas do Vector
-
-- expand:       void (Vector \*self)
-
----
-
-## NodeBST
-
-### Atributos do NodeBST
-
-- chave: inteiro
-- esq: ponteiro para NodeBST
-- dir: ponteiro para NodeBST
-
-### Operações Públicas do NodeBST
-
-- createNodeBST:  NodeBST\* (int chave)
-- destroyNodeBST: void (NodeBST \*self)
-
 ---
 
 ## BST (Árvore Binária de Pesquisa)
@@ -52,6 +33,12 @@
 
 - raiz: ponteiro para NodeBST
 - tamanho: inteiro
+
+### Atributos do NodeBST (interno)
+
+- chave: inteiro
+- esq: ponteiro para NodeBST
+- dir: ponteiro para NodeBST
 
 ### Construtores / Destrutores do BST
 
@@ -72,15 +59,16 @@
 
 ### Operações Internas do BST
 
-- insertNode:   NodeBST\* (NodeBST \*node, int chave)
-- deleteNode:   NodeBST\* (NodeBST \*node, int chave)
-- searchNode:   int      (NodeBST \*node, int chave)
-- heightNode:   int      (NodeBST \*node)
-- minNode:      NodeBST\* (NodeBST \*node)
-- destroyNode:  void     (NodeBST \*node)
-- preOrder:     void     (NodeBST \*node)
-- inOrder:      void     (NodeBST \*node)
-- postOrder:    void     (NodeBST \*node)
+- createNodeBST:   NodeBST\* (int chave)
+- destroyNode:     void     (NodeBST \*node)
+- insertNode:      NodeBST\* (NodeBST \*node, int chave, int \*inserido)
+- deleteNodeBST:   NodeBST\* (NodeBST \*node, int chave, int \*removido)
+- searchNode:      int      (NodeBST \*node, int chave)
+- heightNode:      int      (NodeBST \*node)
+- findMin:         NodeBST\* (NodeBST \*node)
+- preOrder:        void     (NodeBST \*node)
+- inOrder:         void     (NodeBST \*node)
+- postOrder:       void     (NodeBST \*node)
 
 ---
 
