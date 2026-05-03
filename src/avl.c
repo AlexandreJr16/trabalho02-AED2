@@ -106,14 +106,16 @@ static NodeAVL *balancear(NodeAVL *node) {
   return node;
 }
 
-static NodeAVL *insertNode(NodeAVL *node, li chave) {
-  if (!node)
+static NodeAVL *insertNode(NodeAVL *node, li chave, int *inserido) {
+  if (!node) {
+    *inserido = 1;
     return createNodeAVL(chave);
+  }
 
   if (chave < node->chave)
-    node->esq = insertNode(node->esq, chave);
+    node->esq = insertNode(node->esq, chave, inserido);
   else if (chave > node->chave)
-    node->dir = insertNode(node->dir, chave);
+    node->dir = insertNode(node->dir, chave, inserido);
   else
     return node;
 
@@ -221,8 +223,9 @@ void destroyAVL(AVL *self) {
 }
 
 void insertAVL(AVL *self, li chave) {
-  self->raiz = insertNode(self->raiz, chave);
-  self->tamanho++;
+  int inserido = 0;
+  self->raiz = insertNode(self->raiz, chave, &inserido);
+  self->tamanho += inserido;
 }
 
 void deleteAVL(AVL *self, li chave) {
