@@ -9,8 +9,8 @@
 #define JANELA 5
 #define PERCENT_DUPLICATAS 5
 
-#define INPUT_PATH "assets/input.bmp"
-#define OUTPUT_PATH "assets/output.bmp"
+#define INPUT_PATH "assets/input.jpg"
+#define OUTPUT_PATH "assets/output.jpg"
 
 void run_questao2() {
   FILE *fp = fopen(INPUT_PATH, "rb");
