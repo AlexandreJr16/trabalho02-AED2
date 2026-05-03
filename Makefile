@@ -7,7 +7,7 @@ OBJ_DIR = obj
 BIN_DIR = bin
 Q_DIR   = $(SRC_DIR)/questions
 
-TADS = $(OBJ_DIR)/vetor.o $(OBJ_DIR)/bst.o $(OBJ_DIR)/avl.o $(OBJ_DIR)/utils.o
+TADS = $(OBJ_DIR)/vetor.o $(OBJ_DIR)/bst.o $(OBJ_DIR)/avl.o $(OBJ_DIR)/utils.o $(OBJ_DIR)/bst_pacote.o
 
 QUESTIONS_OBJ = $(OBJ_DIR)/question1.o $(OBJ_DIR)/question2.o \
                 $(OBJ_DIR)/question3.o $(OBJ_DIR)/question4.o
