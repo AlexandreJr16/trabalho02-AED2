@@ -113,6 +113,7 @@ static void preOrder(NodeBST *node) {
   if (!node)
     return;
 
+  printf("%li ", node->chave);
   preOrder(node->esq);
   preOrder(node->dir);
 }

@@ -1,5 +1,5 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -g
+CC      = gcc
+CFLAGS  = -Wall -Wextra -g
 INCLUDES = -Iinclude
 
 SRC_DIR = src
@@ -8,25 +8,34 @@ BIN_DIR = bin
 Q_DIR   = $(SRC_DIR)/questions
 
 TADS = $(OBJ_DIR)/vetor.o $(OBJ_DIR)/bst.o $(OBJ_DIR)/avl.o $(OBJ_DIR)/utils.o
-QUESTIONS = $(BIN_DIR)/question1 $(BIN_DIR)/question2 $(BIN_DIR)/question3 $(BIN_DIR)/question4
 
-.PHONY: all clean q1 q2 q3 q4
+QUESTIONS_OBJ = $(OBJ_DIR)/question1.o $(OBJ_DIR)/question2.o \
+                $(OBJ_DIR)/question3.o $(OBJ_DIR)/question4.o
 
-all: $(QUESTIONS)
+TARGET = $(BIN_DIR)/main
 
-q1: $(BIN_DIR)/question1
-q2: $(BIN_DIR)/question2
-q3: $(BIN_DIR)/question3
-q4: $(BIN_DIR)/question4
+.PHONY: all clean run
+
+all: $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
+
+$(TARGET): $(OBJ_DIR)/main.o $(QUESTIONS_OBJ) $(TADS) | $(BIN_DIR)
+	$(CC) $(CFLAGS) $^ -o $@ -lm
+
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
 $(OBJ_DIR)/%.o: $(Q_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-$(BIN_DIR)/%: $(OBJ_DIR)/%.o $(TADS) | $(BIN_DIR)
-	$(CC) $(CFLAGS) $^ -o $@ -lm
+
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
