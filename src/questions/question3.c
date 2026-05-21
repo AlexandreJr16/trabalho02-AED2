@@ -8,8 +8,13 @@
 
 #define N 1000000
 #define EXECUCOES 15
+#define REPETICOES 100000
 
 void run_questao3() {
+  printf("\n[MEMORIA] Antes de alocar estruturas. Anote a memoria agora.\n");
+  printf("Pressione ENTER para continuar...\n");
+  getchar();
+
   li range = N * 100L;
 
   clock_t inicio, fim;
@@ -28,6 +33,10 @@ void run_questao3() {
     setElementAtVector(vetor, i, valor);
   }
 
+  printf("\n[MEMORIA] Vetor (%d elementos) criado. Anote a memoria agora.\n", N);
+  printf("Pressione ENTER para continuar...\n");
+  getchar();
+
   li *indices = (li *)malloc(sizeof(li) * N);
   for (li i = 0; i < N; i++)
     indices[i] = i;
@@ -44,35 +53,45 @@ void run_questao3() {
   }
   free(indices);
 
+  printf("\n[MEMORIA] Vetor + BST (%d elementos cada) criados. Anote a memoria agora.\n", N);
+  printf("Pressione ENTER para continuar...\n");
+  getchar();
+
   for (li i = 0; i < EXECUCOES; i++) {
     li posicao = genRandomNumber(0, N - 1);
     li elemento = getElementAtVector(vetor, posicao);
 
     inicio = clock();
-    binarySearchVector(vetor, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      binarySearchVector(vetor, elemento);
     fim = clock();
     tempo_gasto = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
     temposVetor[i] = tempo_gasto;
 
     inicio = clock();
-    searchBST(bst, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      searchBST(bst, elemento);
     fim = clock();
     tempo_gasto = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
     temposBST[i] = tempo_gasto;
   }
 
-  li valor_max = getElementAtVector(vetor, N - 1);
   for (li i = 0; i < EXECUCOES; i++) {
-    li elemento = genRandomNumber(0, valor_max + (range / 10));
+    li elemento;
+    do {
+      elemento = genRandomNumber(0, range);
+    } while (binarySearchVector(vetor, elemento) != -1);
 
     inicio = clock();
-    binarySearchVector(vetor, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      binarySearchVector(vetor, elemento);
     fim = clock();
     tempo_gasto = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
     temposVetor[i + EXECUCOES] = tempo_gasto;
 
     inicio = clock();
-    searchBST(bst, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      searchBST(bst, elemento);
     fim = clock();
     tempo_gasto = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
     temposBST[i + EXECUCOES] = tempo_gasto;
@@ -96,4 +115,8 @@ void run_questao3() {
   free(temposBST);
   destroyVector(vetor);
   destroyBST(bst);
+
+  printf("\n[MEMORIA] Apos liberar vetor e BST. Anote a memoria agora.\n");
+  printf("Pressione ENTER para continuar...\n");
+  getchar();
 }

@@ -10,6 +10,7 @@
 #define ARVORES 10
 #define BUSCAS 30
 #define EXISTENTES 15
+#define REPETICOES 100000
 
 void run_questao4() {
   li range = N * 100L;
@@ -73,12 +74,14 @@ void run_questao4() {
     li elemento = valores[genRandomNumber(0, N - 1)];
 
     inicio = clock();
-    searchBST(bst, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      searchBST(bst, elemento);
     fim = clock();
     tempos_busca_bst[i] = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
 
     inicio = clock();
-    searchAVL(avl, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      searchAVL(avl, elemento);
     fim = clock();
     tempos_busca_avl[i] = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
 
@@ -87,15 +90,20 @@ void run_questao4() {
   }
 
   for (int i = EXISTENTES; i < BUSCAS; i++) {
-    li elemento = range + genRandomNumber(1, range);
+    li elemento;
+    do {
+      elemento = genRandomNumber(0, range);
+    } while (searchBST(bst, elemento));
 
     inicio = clock();
-    searchBST(bst, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      searchBST(bst, elemento);
     fim = clock();
     tempos_busca_bst[i] = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
 
     inicio = clock();
-    searchAVL(avl, elemento);
+    for (int r = 0; r < REPETICOES; r++)
+      searchAVL(avl, elemento);
     fim = clock();
     tempos_busca_avl[i] = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
 

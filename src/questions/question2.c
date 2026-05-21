@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAMANHO_PACOTE 1024
+#define TAMANHO_PACOTE 8
 #define JANELA 5
-#define PERCENT_DUPLICATAS 5
+#define PERCENT_DUPLICATAS 15
 
 #define INPUT_PATH "assets/input.jpg"
 #define OUTPUT_PATH "assets/output.jpg"
